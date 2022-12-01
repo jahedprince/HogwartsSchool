@@ -17,10 +17,9 @@ You are the CTO of a company which manages Campuses and Enrollments. Create a RE
 For this project, you must use Express to handle HTTP requests and Sequelize to interface with your database. Likewise, you must use React, Redux and React-Redux on the front-end. This means that all important state (i.e. students and campuses) must be managed by the Redux store (unimportant state, like form data, may be managed by stateful React components). Components that display student/campus data should therefore be connected to the Redux store. 
 
 - other client side libraries you will need
-- redux
+- redux toolkit (and thunks)
 - react-redux
-- react-router-dom@5
-- redux-thunk
+- react-router-dom (v6)
 - axios
 
 ### Requirements + Rubric (see rubric file)
