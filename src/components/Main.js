@@ -1,17 +1,33 @@
-import React from 'react';
-/* 
-    This is you entry point for your routes
-*/
+import React, { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Navbar, Campuses, Students } from "./";
+import { fetchCampusesAsync } from "../features/campusesSlice";
+import { fetchStudentsAsync } from "../features/studentsSlice";
+
 const Main = () => {
-    return (
-        <div>
-            <nav>Welcome!</nav>
-            <main>
-                <h1>Welcome to the Margaret Hamilton Academy of JavaScript!</h1>
-                <p>This seems like a nice place to get started with some Routes!</p>
-            </main>
-        </div>
-    );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCampusesAsync());
+    dispatch(fetchStudentsAsync());
+  }, [dispatch]);
+
+  return (
+    <div id="main">
+      <nav>
+        <Navbar />
+      </nav>
+
+      <main>
+        <h1>Welcome to the Hogwarts School of Witchcraft and Wizardry!</h1>
+        <Routes>
+          <Route path="/campuses" element={<Campuses />} />
+          <Route path="/students" element={<Students />} />
+        </Routes>
+      </main>
+    </div>
+  );
 };
 
 export default Main;
