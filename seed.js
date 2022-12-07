@@ -67,14 +67,6 @@ const seed = async () => {
         campusId: 2,
       },
       {
-        firstName: "Zacharias",
-        lastName: "Smith",
-        email: "zsmith@hufflepuff.com",
-        imageUrl: "/students/zacharias.jpeg",
-        gpa: 3.2,
-        campusId: 2,
-      },
-      {
         firstName: "Luna",
         lastName: "Lovegood",
         email: "llovegood@ravenclaw.com",

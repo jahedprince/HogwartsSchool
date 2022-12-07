@@ -9,7 +9,7 @@ export const fetchCampusesAsync = createAsyncThunk("allCampuses", async () => {
 export const addCampus = createAsyncThunk(
   "POST Campus",
   async ({ name, address, description }) => {
-    const { data } = await axios.post("api/campuses", {
+    const { data } = await axios.post("/api/campuses", {
       name,
       address,
       description,
@@ -17,6 +17,15 @@ export const addCampus = createAsyncThunk(
     return data;
   }
 );
+
+export const deleteCampus = createAsyncThunk("/deleteCampus", async (id) => {
+  try {
+    const { data } = await axios.delete(`/api/campuses/${id}`);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 const campusesSlice = createSlice({
   name: "campuses",
@@ -28,6 +37,9 @@ const campusesSlice = createSlice({
     });
     builder.addCase(addCampus.fulfilled, (state, action) => {
       state.push(action.payload);
+    });
+    builder.addCase(deleteCampus.fulfilled, (state, action) => {
+      return state.filter((campus) => campus.id !== action.payload.id);
     });
   },
 });

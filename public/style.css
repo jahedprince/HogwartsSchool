@@ -91,6 +91,17 @@
   margin: 10px 0px 0px 0px;
 }
 
+.delete-button {
+  background-color: #9f0c0c;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
 #headline {
   font-size: 3.5vw;
 }
