@@ -1,16 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-//TODO add (number of campuses and number of students to navbar)
 const Navbar = () => {
   return (
     <div id="navbar" className="row">
-      <NavLink to="/students" className="active">
-        Students
-      </NavLink>
-      <NavLink to="/campuses" className="active">
-        Campuses
-      </NavLink>
+      <NavLink to="/students">Wizards</NavLink>
+      <NavLink to="/campuses">Houses</NavLink>
+      <NavLink to="/CreateCampus">New House</NavLink>
+      <NavLink to="/CreateStudent">New Wizard</NavLink>
     </div>
   );
 };

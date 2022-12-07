@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Student } = require("../db");
+const { Student, Campus } = require("../db");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -12,8 +12,18 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:studentId", async (req, res, next) => {
   try {
-    const student = await Student.findByPk(req.params.campusId);
+    const student = await Student.findByPk(req.params.studentId, {
+      include: Campus,
+    });
     res.json(student);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post("/", async (req, res, next) => {
+  try {
+    res.status(201).send(await Student.create(req.body));
   } catch (err) {
     next(err);
   }

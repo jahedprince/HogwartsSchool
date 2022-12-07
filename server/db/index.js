@@ -8,12 +8,12 @@ const Campus = require("./Campus");
 // (https://sequelize-guides.netlify.com/association-types/).
 // Example:
 // Puppy.belongsTo(Owner)
-Campus.hasMany(Student);
 Student.belongsTo(Campus);
+Campus.hasMany(Student);
 
 module.exports = {
   // Include your models in this exports object as well!
   db,
-  Campus,
   Student,
+  Campus,
 };

@@ -1,23 +1,34 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { selectCampuses } from "../features/campusesSlice";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCampusesAsync, selectCampuses } from "../features/campusesSlice";
 
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Campuses = () => {
+  const dispatch = useDispatch();
   const campuses = useSelector(selectCampuses);
+
+  useEffect(() => {
+    dispatch(fetchCampusesAsync());
+  }, [dispatch]);
 
   return (
     <>
-      <div id="campuses" className="column">
+      <div className="row">
         {campuses && campuses.length
           ? campuses.map((campus) => (
-              <Link to={`/campuses/${campus.id}`} key={`Campuses ${campus.id}`}>
-                <div className="campus">
-                  <h3>{campus.name}</h3>
+              <NavLink
+                to={`/campuses/${campus.id}`}
+                key={`All Campuses ${campus.id}`}
+              >
+                <div class="single-player-card">
+                  <div class="header-info">
+                    <p class="pup-title">{campus.name}</p>
+                    <p class="pup-number">{campus.id}</p>
+                  </div>
                   <img src={campus.imageUrl} />
                 </div>
-              </Link>
+              </NavLink>
             ))
           : null}
       </div>
