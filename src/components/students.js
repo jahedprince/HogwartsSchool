@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -7,23 +7,15 @@ import {
   deleteStudent,
 } from "../features/studentsSlice";
 
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Students = () => {
   const dispatch = useDispatch();
   const students = useSelector(selectStudents);
-  const Navigate = useNavigate();
-  const [state, setState] = useState(false);
 
   useEffect(() => {
     dispatch(fetchStudentsAsync());
-  }, [dispatch, state]);
-
-  const handleDelete = async (id) => {
-    setState(!state);
-    await dispatch(deleteStudent(id));
-    Navigate("/students");
-  };
+  }, [dispatch]);
 
   return (
     <>
@@ -49,7 +41,7 @@ const Students = () => {
                 <button
                   className="delete-button"
                   onClick={() => {
-                    handleDelete(student.id);
+                    dispatch(deleteStudent(student.id));
                   }}
                 >
                   X

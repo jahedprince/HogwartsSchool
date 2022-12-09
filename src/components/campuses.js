@@ -6,26 +6,15 @@ import {
   deleteCampus,
 } from "../features/campusesSlice";
 
-import { useParams, useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 const Campuses = () => {
   const dispatch = useDispatch();
   const campuses = useSelector(selectCampuses);
 
-  const { id } = useParams();
-
-  const Navigate = useNavigate();
-  const [state, setState] = useState(false);
-
   useEffect(() => {
     dispatch(fetchCampusesAsync());
-  }, [dispatch, state]);
-
-  const handleDelete = async (id) => {
-    setState(!state);
-    await dispatch(deleteCampus(id));
-    Navigate("/campuses");
-  };
+  }, [dispatch]);
 
   return (
     <>
@@ -47,7 +36,7 @@ const Campuses = () => {
                 <button
                   className="delete-button"
                   onClick={() => {
-                    handleDelete(campus.id);
+                    dispatch(deleteCampus(campus.id));
                   }}
                 >
                   X

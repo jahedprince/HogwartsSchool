@@ -1,27 +1,26 @@
 import React, { useEffect } from "react";
-import { Routes, Route, Link, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
   fetchSingleStudentAsync,
-  selectSingleStudent,
+  selectStudent,
 } from "../features/SingleStudentSlice";
 
 const SingleStudent = () => {
   const { studentId } = useParams();
-
-  const singleStudent = useSelector(selectSingleStudent);
-  const { firstName, lastName, email, imageUrl, gpa, campus } = singleStudent;
-
   const dispatch = useDispatch();
+
+  const student = useSelector(selectStudent);
+  const { firstName, lastName, email, imageUrl, gpa, campus } = student;
 
   useEffect(() => {
     dispatch(fetchSingleStudentAsync(studentId));
   }, [dispatch]);
 
   return (
-    <div className="single-player-view">
-      <div className="header-info">
+    <div className="single-player-card" class="column">
+      <div className="header-info" class="row">
         <h1>
           {firstName} {lastName}
         </h1>
@@ -34,19 +33,18 @@ const SingleStudent = () => {
       </div>
       <div className="campus_enrolled">
         {campus ? (
-          <Link to={`/campuses/${campus.id}`}>
-            <div className="campus_card">
-              <div className="campus_image">
-                <img src={campus.imageUrl} />
-              </div>
-              <div className="campus_name">
-                <h3>{campus.name}</h3>
-              </div>
-            </div>
-          </Link>
+          <div className="text">
+            This student attends:
+            <Link to={`/campuses/${campus.id}`}>{campus.name}</Link>
+          </div>
         ) : (
           `${firstName} is currently not placed in a house.`
         )}
+      </div>
+      <div className="form">
+        <Link to={`/students/${studentId}/edit`}>
+          <button className="edit_btn">Edit</button>
+        </Link>
       </div>
     </div>
   );

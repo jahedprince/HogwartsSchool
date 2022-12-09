@@ -1,20 +1,28 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchCampusesAsync = createAsyncThunk("allCampuses", async () => {
-  const { data } = await axios.get("/api/campuses");
-  return data;
+export const fetchCampusesAsync = createAsyncThunk("/campuses", async () => {
+  try {
+    const { data } = await axios.get("/api/campuses");
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 export const addCampus = createAsyncThunk(
   "POST Campus",
   async ({ name, address, description }) => {
-    const { data } = await axios.post("/api/campuses", {
-      name,
-      address,
-      description,
-    });
-    return data;
+    try {
+      const { data } = await axios.post("/api/campuses", {
+        name,
+        address,
+        description,
+      });
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
   }
 );
 
@@ -27,7 +35,7 @@ export const deleteCampus = createAsyncThunk("/deleteCampus", async (id) => {
   }
 });
 
-const campusesSlice = createSlice({
+export const campusesSlice = createSlice({
   name: "campuses",
   initialState: [],
   reducers: {},

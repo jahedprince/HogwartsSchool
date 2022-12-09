@@ -1,21 +1,15 @@
 const router = require("express").Router();
 const { Student, Campus } = require("../db");
 
+Campus.hasMany(Student);
+Student.belongsTo(Campus);
+
 router.get("/", async (req, res, next) => {
   try {
-    const students = await Student.findAll();
-    res.json(students);
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get("/:studentId", async (req, res, next) => {
-  try {
-    const student = await Student.findByPk(req.params.studentId, {
+    const students = await Student.findAll({
       include: Campus,
     });
-    res.json(student);
+    res.send(students);
   } catch (err) {
     next(err);
   }
@@ -29,13 +23,48 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.delete("/:studentId", async (req, res, next) => {
+router.get("/:studentId", async (req, res, next) => {
   try {
-    const student = await Student.findByPk(req.params.studentId);
-    await student.destroy();
+    const student = await Student.findByPk(req.params.studentId, {
+      include: Campus,
+    });
     res.send(student);
   } catch (err) {
     next(err);
+  }
+});
+
+router.put("/:studentId", async (req, res, next) => {
+  try {
+    const todo = await Student.findByPk(req.params.studentId, {
+      include: Campus,
+    });
+    res.send(await todo.update(req.body));
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete("/:studentId", async (req, res, next) => {
+  try {
+    const todo = await Student.findByPk(req.params.studentId);
+    await todo.destroy();
+    res.send(todo);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/unregister/:studentId", async (req, res, next) => {
+  try {
+    const student = await Student.findByPk(req.params.studentId, {
+      include: Campus,
+    });
+    const campus = await Campus.findByPk(student.campusId);
+    await campus.unregisterStudent(student);
+    res.send(student);
+  } catch (error) {
+    next(error);
   }
 });
 

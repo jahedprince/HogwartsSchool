@@ -2,6 +2,8 @@ const { db, Campus, Student } = require("./server/db");
 
 const seed = async () => {
   try {
+    await db.sync({ force: true });
+
     const campuses = [
       {
         name: "Gryffindor",
@@ -40,7 +42,6 @@ const seed = async () => {
         email: "hpotter@gryffindor.com",
         imageUrl: "/students/harrypotter.jpeg",
         gpa: 3.5,
-        campusId: 1,
       },
       {
         firstName: "Hermione",
@@ -48,7 +49,6 @@ const seed = async () => {
         email: "hgranger@gryffindor.com",
         imageUrl: "/students/hermione.jpeg",
         gpa: 4.0,
-        campusId: 1,
       },
       {
         firstName: "Ron",
@@ -56,7 +56,6 @@ const seed = async () => {
         email: "rweasley@gryffindor.com",
         imageUrl: "/students/ronweasley.jpeg",
         gpa: 3.0,
-        campusId: 1,
       },
       {
         firstName: "Cedric",
@@ -64,7 +63,6 @@ const seed = async () => {
         email: "cdiggory@hufflepuff.com",
         imageUrl: "/students/cedric.jpeg",
         gpa: 3.7,
-        campusId: 2,
       },
       {
         firstName: "Luna",
@@ -72,7 +70,6 @@ const seed = async () => {
         email: "llovegood@ravenclaw.com",
         imageUrl: "/students/luna.jpeg",
         gpa: 3.8,
-        campusId: 3,
       },
       {
         firstName: "Myrtle",
@@ -80,7 +77,6 @@ const seed = async () => {
         email: "mwarren@ravenclaw.com",
         imageUrl: "/students/myrtle.jpeg",
         gpa: 3.6,
-        campusId: 3,
       },
       {
         firstName: "Draco",
@@ -88,7 +84,6 @@ const seed = async () => {
         email: "dmalfoy@slytherin.com",
         imageUrl: "/students/dracomalfoy.jpeg",
         gpa: 3.7,
-        campusId: 4,
       },
       {
         firstName: "Vincent",
@@ -96,7 +91,6 @@ const seed = async () => {
         email: "vcrabbe@slytherin.com",
         imageUrl: "/students/vincent.jpeg",
         gpa: 2.5,
-        campusId: 4,
       },
       {
         firstName: "Gregory",
@@ -104,11 +98,8 @@ const seed = async () => {
         email: "ggoyle@slytherin.com",
         imageUrl: "/students/goyle.jpeg",
         gpa: 2.5,
-        campusId: 4,
       },
     ];
-    await db.sync({ force: true });
-
     await Promise.all(campuses.map((campus) => Campus.create(campus)));
 
     await Promise.all(students.map((student) => Student.create(student)));

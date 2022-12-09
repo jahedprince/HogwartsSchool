@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addCampus } from "../features/campusesSlice";
+import { editCampus } from "../features/SingleCampusSlice";
 
-const CreateCampus = () => {
+const CampusForm = () => {
+  const { id } = useParams();
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
@@ -14,7 +15,7 @@ const CreateCampus = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    dispatch(addCampus({ name, address, description }));
+    dispatch(editCampus({ id, name, address, description }));
     setName("");
     setAddress("");
     setDescription("");
@@ -24,9 +25,10 @@ const CreateCampus = () => {
   return (
     <>
       <form id="todo-form" onSubmit={handleSubmit}>
-        <h2> Add A New House! </h2>
+        <h2> Edit House </h2>
+
         <p>
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="name">Edit Name:</label>
           <input
             name="name"
             value={name}
@@ -36,7 +38,7 @@ const CreateCampus = () => {
         </p>
 
         <p>
-          <label htmlFor="address">Address:</label>
+          <label htmlFor="address">Edit Address:</label>
           <input
             name="address"
             value={address}
@@ -46,7 +48,7 @@ const CreateCampus = () => {
         </p>
 
         <p>
-          <label htmlFor="description">Description:</label>
+          <label htmlFor="description">Edit Description:</label>
           <input
             name="description"
             value={description}
@@ -59,14 +61,11 @@ const CreateCampus = () => {
           type="submit"
           disabled={name && address && description ? false : true}
         >
-          Submit
+          Update
         </button>
-        <p>
-          <Link to="/campuses">Cancel</Link>
-        </p>
       </form>
     </>
   );
 };
 
-export default CreateCampus;
+export default CampusForm;

@@ -1,31 +1,15 @@
 const router = require("express").Router();
 const { Campus, Student } = require("../db");
 
+Campus.hasMany(Student);
+Student.belongsTo(Campus);
+
 router.get("/", async (req, res, next) => {
   try {
-    const campuses = await Campus.findAll();
-    res.json(campuses);
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get("/:campusId", async (req, res, next) => {
-  try {
-    const campus = await Campus.findByPk(req.params.campusId);
-    res.json(campus);
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get("/:campusId/students", async (req, res, next) => {
-  try {
-    const students = await Student.findAll({
-      where: { campusId: req.params.campusId },
-      include: [Campus],
+    const data = await Campus.findAll({
+      include: Student,
     });
-    res.json(students);
+    res.send(data);
   } catch (err) {
     next(err);
   }
@@ -34,6 +18,28 @@ router.get("/:campusId/students", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     res.status(201).send(await Campus.create(req.body));
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/:campusId", async (req, res, next) => {
+  try {
+    const campus = await Campus.findByPk(req.params.campusId, {
+      include: Student,
+    });
+    res.send(await campus.update(req.body));
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/:campusId", async (req, res, next) => {
+  try {
+    const data = await Campus.findByPk(req.params.campusId, {
+      include: Student,
+    });
+    res.send(data);
   } catch (err) {
     next(err);
   }
@@ -48,5 +54,14 @@ router.delete("/:campusId", async (req, res, next) => {
     next(err);
   }
 });
+
+// router.put("/:campusId/edit", async (req, res, next) => {
+//   try {
+//     const campus = await Campus.findByPk(req.params.campusId);
+//     res.send(await campus.update(req.body));
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 module.exports = router;

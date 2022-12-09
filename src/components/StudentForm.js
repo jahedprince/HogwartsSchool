@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addStudent } from "../features/studentsSlice";
+import { editStudent } from "../features/SingleStudentSlice";
 
-const CreateStudent = () => {
+const StudentForm = (props) => {
+  const { id, selection } = props;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,19 +14,21 @@ const CreateStudent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async (evt) => {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
-    await dispatch(addStudent({ firstName, lastName, email }));
+    selection === "add"
+      ? dispatch(addStudent({ firstName, lastName, email }))
+      : dispatch(editStudent({ id, firstName, lastName, email }));
     setFirstName("");
     setLastName("");
     setEmail("");
+    // setGpa("");
     navigate("/students");
   };
-
   return (
     <>
       <form id="todo-form" onSubmit={handleSubmit}>
-        <h2> Place A New Wizard! </h2>
+        <h2>{selection === "add" ? "Place A New Wizard!" : "Edit Wizard!"}</h2>
 
         <p>
           <label htmlFor="firstName">First Name:</label>
@@ -49,11 +54,21 @@ const CreateStudent = () => {
           <label htmlFor="email">Email Address:</label>
           <input
             name="email"
-            type="email"
+            value={email}
             placeholder="Enter Email Address"
             onChange={(e) => setEmail(e.target.value)}
           />
         </p>
+
+        {/* <p>
+          <label htmlFor="gpa">GPA:</label>
+          <input
+            name="gpa"
+            value={gpa}
+            placeholder="Enter GPA"
+            onChange={(e) => setGpa(e.target.value)}
+          />
+        </p> */}
 
         <button
           type="submit"
@@ -61,12 +76,13 @@ const CreateStudent = () => {
         >
           Submit
         </button>
-        <p>
-          <Link to="/students">Cancel</Link>
-        </p>
+
+        {/*
+        <Link to="/">Cancel</Link>
+        ADD image maybe 
+        */}
       </form>
     </>
   );
 };
-
-export default CreateStudent;
+export default StudentForm;
