@@ -26,8 +26,7 @@ const Student = db.define("Student", {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue:
-      "https://assets.stickpng.com/images/6127d693aa481f0004ea72c5.png",
+    defaultValue: "",
   },
   gpa: {
     type: Sequelize.FLOAT,
