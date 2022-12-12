@@ -16,18 +16,6 @@ const SingleCampus = () => {
 
   const campus = useSelector(selectCampus);
   const { name, imageUrl, description, address } = campus.campusInfo;
-  // const { enrolled } = campus;
-
-  // const handleUnregister = (student) => {
-  //   const { id, email, campusId } = student;
-  //   dispatch(
-  //     unregisterStudent({
-  //       studentId: id,
-  //       email,
-  //       campusId,
-  //     })
-  //   );
-  // };
 
   useEffect(() => {
     dispatch(fetchSingleCampusAsync(campusId));
@@ -37,9 +25,6 @@ const SingleCampus = () => {
     <div className="single-player-view">
       <div className="single-player-info">
         <h1>{name}</h1>
-        <Link to={`/campuses/${campus.id}/edit`}>
-          <button className="edit_btn">Edit</button>
-        </Link>
       </div>
       <h3>Located: {address}</h3>
       <h3>{description}</h3>
@@ -51,6 +36,7 @@ const SingleCampus = () => {
           campus.students.map((student) => {
             return (
               <>
+                <div className="student-container" key={campus.id}></div>
                 <Link to={`/students/${student.id}`}>
                   <div>{`${student.firstName} ${student.lastName}`}</div>
                 </Link>

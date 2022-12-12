@@ -23,7 +23,8 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/:campusId", async (req, res, next) => {
+//EDIT
+router.put("/:campusId/", async (req, res, next) => {
   try {
     const campus = await Campus.findByPk(req.params.campusId, {
       include: Student,
@@ -54,14 +55,5 @@ router.delete("/:campusId", async (req, res, next) => {
     next(err);
   }
 });
-
-// router.put("/:campusId/edit", async (req, res, next) => {
-//   try {
-//     const campus = await Campus.findByPk(req.params.campusId);
-//     res.send(await campus.update(req.body));
-//   } catch (error) {
-//     next(error);
-//   }
-// });
 
 module.exports = router;

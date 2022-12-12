@@ -10,7 +10,7 @@ import {
   SingleStudent,
   CreateCampus,
   CreateStudent,
-  CampusForm,
+  EditCampus,
   StudentForm,
 } from "./";
 
@@ -39,7 +39,7 @@ const Main = () => {
           <Route path="/campuses" element={<Campuses key={uuidv4()} />} />
           <Route path="/campuses/:campusId" element={<SingleCampus />} />
           <Route path="/CreateCampus" element={<CreateCampus />} />
-          <Route path="/campusForm/:campusId" element={<CampusForm />} />
+          <Route path="/editCampus/:campusId" element={<EditCampus />} />
 
           <Route path="/students" element={<Students key={uuidv4()} />} />
           <Route path="/students/:studentId" element={<SingleStudent />} />

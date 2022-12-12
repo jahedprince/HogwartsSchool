@@ -13,7 +13,7 @@ export const fetchSingleCampusAsync = createAsyncThunk(
   }
 );
 
-export const editCampus = createAsyncThunk(
+export const editCampusAsync = createAsyncThunk(
   "form/edit",
   async ({ campusId, name, address, description }) => {
     try {
@@ -64,7 +64,7 @@ export const campusSlice = createSlice({
     // builder.addCase(fetchCampusStudents.fulfilled, (state, action) => {
     //   state.enrolled = action.payload;
     // });
-    builder.addCase(editCampus.fulfilled, (state, action) => {
+    builder.addCase(editCampusAsync.fulfilled, (state, action) => {
       state = action.payload;
     });
   },

@@ -57,12 +57,15 @@ router.delete("/:studentId", async (req, res, next) => {
 
 router.put("/unregister/:studentId", async (req, res, next) => {
   try {
-    const student = await Student.findByPk(req.params.studentId, {
+    const todo1 = await Student.findByPk(req.params.studentId, {
       include: Campus,
     });
-    const campus = await Campus.findByPk(student.campusId);
-    await campus.unregisterStudent(student);
-    res.send(student);
+
+    const todo2 = await Campus.findByPk(todo1.campusId);
+
+    await todo2.unregisterStudent(todo1);
+
+    res.send(todo1);
   } catch (error) {
     next(error);
   }

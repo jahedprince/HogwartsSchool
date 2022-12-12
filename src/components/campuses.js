@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, NavLink } from "react-router-dom";
 import {
   fetchCampusesAsync,
   selectCampuses,
   deleteCampus,
 } from "../features/campusesSlice";
 
-import { useNavigate, NavLink } from "react-router-dom";
-
 const Campuses = () => {
   const dispatch = useDispatch();
   const campuses = useSelector(selectCampuses);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchCampusesAsync());
@@ -40,6 +40,14 @@ const Campuses = () => {
                   }}
                 >
                   X
+                </button>
+                <button
+                  onClick={() => {
+                    navigate(`/editCampus/${campus.id}`);
+                  }}
+                  className="edit"
+                >
+                  Edit this Campus
                 </button>
               </div>
             ))

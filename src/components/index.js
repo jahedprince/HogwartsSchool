@@ -6,5 +6,5 @@ export { default as SingleCampus } from "./singleCampus.js";
 export { default as SingleStudent } from "./singleStudent.js";
 export { default as CreateStudent } from "./CreateStudent.js";
 export { default as CreateCampus } from "./CreateCampus.js";
-export { default as CampusForm } from "./CampusForm.js";
+export { default as EditCampus } from "./editCampus.js";
 export { default as StudentForm } from "./StudentForm.js";
