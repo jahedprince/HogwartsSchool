@@ -36,7 +36,7 @@ const EditCampus = () => {
           <label htmlFor="campusName">Edit Name:</label>
           <input
             name="campusName"
-            value={campus.name}
+            value={name}
             placeholder="Enter House Name"
             onChange={(e) => setName(e.target.value)}
           />
@@ -46,7 +46,7 @@ const EditCampus = () => {
           <label htmlFor="campusAddress">Edit Address:</label>
           <input
             name="campusAddress"
-            value={campus.address}
+            value={address}
             placeholder="Enter House Address"
             onChange={(e) => setAddress(e.target.value)}
           />
@@ -56,7 +56,7 @@ const EditCampus = () => {
           <label htmlFor="campusDescription">Edit Description:</label>
           <input
             name="campusDescription"
-            value={campus.description}
+            value={description}
             placeholder="Enter House Description"
             onChange={(e) => setDescription(e.target.value)}
           />

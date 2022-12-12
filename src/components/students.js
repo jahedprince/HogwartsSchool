@@ -23,11 +23,11 @@ const Students = () => {
       <div class="grid-flow">
         {students && students.length
           ? students.map((student) => (
-              <div className="single-player-card">
-                <NavLink
-                  to={`/students/${student.id}`}
-                  key={`All Students ${student.id}`}
-                >
+              <div
+                className="single-player-card"
+                key={`All Students ${student.id}`}
+              >
+                <NavLink to={`/students/${student.id}`}>
                   <div class="single-player-card">
                     <div class="header-info">
                       <p class="pup-title">

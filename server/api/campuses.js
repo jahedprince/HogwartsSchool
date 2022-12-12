@@ -1,9 +1,6 @@
 const router = require("express").Router();
 const { Campus, Student } = require("../db");
 
-Campus.hasMany(Student);
-Student.belongsTo(Campus);
-
 router.get("/", async (req, res, next) => {
   try {
     const data = await Campus.findAll({

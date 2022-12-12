@@ -2,9 +2,6 @@ const router = require("express").Router();
 const Campus = require("../db/Campus");
 const Student = require("../db/Student");
 
-Campus.hasMany(Student);
-Student.belongsTo(Campus);
-
 router.get("/", async (req, res, next) => {
   try {
     const students = await Student.findAll({
@@ -56,19 +53,14 @@ router.delete("/:studentId", async (req, res, next) => {
   }
 });
 
-router.put("/unregister/:studentId", async (req, res, next) => {
+router.put("/students/:id", async (req, res, next) => {
   try {
-    const todo1 = await Student.findByPk(req.params.studentId, {
-      include: Campus,
-    });
-
-    const todo2 = await Campus.findByPk(todo1.campusId);
-
-    await todo2.unregisterStudent(todo1);
-
-    res.send(todo1);
-  } catch (error) {
-    next(error);
+    const studentToUpdate = await Student.findByPk(req.params.id);
+    const updatedStudentData = await studentToUpdate.update(req.body);
+    res.status(201).send(updatedStudentData);
+  } catch (err) {
+    console.error("error in campuses put route: ");
+    next(err);
   }
 });
 

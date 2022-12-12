@@ -31,13 +31,11 @@ export const editCampusAsync = createAsyncThunk(
 
 export const campusSlice = createSlice({
   name: "campus",
-  initialState: {
-    campusInfo: {},
-  },
+  initialState: {},
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchSingleCampusAsync.fulfilled, (state, action) => {
-      state.campusInfo = action.payload;
+      return action.payload;
     });
     builder.addCase(editCampusAsync.fulfilled, (state, action) => {
       state = action.payload;

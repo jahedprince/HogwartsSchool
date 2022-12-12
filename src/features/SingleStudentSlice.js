@@ -30,6 +30,18 @@ export const editStudentAsync = createAsyncThunk(
   }
 );
 
+export const unregisterStudent = createAsyncThunk(
+  "students/removeStudent",
+  async ({ id, update }) => {
+    try {
+      const { data } = await axios.put(`/api/students/${id}`, update);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 export const studentSlice = createSlice({
   name: "student",
   initialState: [],
@@ -40,6 +52,9 @@ export const studentSlice = createSlice({
     });
     builder.addCase(editStudentAsync.fulfilled, (state, action) => {
       state = action.payload;
+    });
+    builder.addCase(unregisterStudent.fulfilled, (state, action) => {
+      return action.payload;
     });
   },
 });

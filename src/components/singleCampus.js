@@ -7,7 +7,7 @@ import {
   selectCampus,
 } from "../features/SingleCampusSlice";
 
-import { unregisterStudent } from "../features/studentsSlice";
+import { unregisterStudent } from "../features/SingleStudentSlice";
 
 const SingleCampus = () => {
   const { campusId } = useParams();
@@ -15,44 +15,45 @@ const SingleCampus = () => {
   const navigate = useNavigate();
 
   const campus = useSelector(selectCampus);
-  const { name, imageUrl, description, address } = campus.campusInfo;
 
   useEffect(() => {
     dispatch(fetchSingleCampusAsync(campusId));
-  }, [dispatch]);
+  }, [dispatch, campusId]);
 
   return (
     <>
       <div className="single-player-view">
         <div className="single-player-info">
-          <h1>{name}</h1>
-          <Link to={`/campuses/${campus.id}/edit`}>
-            <button className="edit_btn">Edit</button>
-          </Link>
+          <h1>{campus.name}</h1>
         </div>
-        <h3>Located: {address}</h3>
-        <h3>{description}</h3>
-        <img src={imageUrl} />
+        <h3>Located: {campus.address}</h3>
+        <h3>{campus.description}</h3>
+        <img src={campus.imageUrl} />
 
         <div>
           Wizards Placed In This House:
-          {campus.students ? (
+          {campus.students && campus.students.length ? (
             campus.students.map((student) => {
               return (
-                <>
-                  <Link to={`/students/${student.id}`} key={student.id}>
-                    <div>{`${student.firstName} ${student.lastName}`}</div>
-                  </Link>
+                <div key={`student ${student.id}`}>
+                  <Link
+                    to={`/students/${student.id}`}
+                  >{`${student.firstName} ${student.lastName}`}</Link>
                   <button
                     onClick={async () => {
-                      await dispatch(unregisterStudent(student.id));
-                      navigate("/campuses");
+                      await dispatch(
+                        unregisterStudent({
+                          id: student.id,
+                          update: { campusId: null },
+                        })
+                      );
+                      dispatch(fetchSingleCampusAsync(campusId));
+                      navigate(`/students/${student.id}`);
                     }}
-                    className="unregister"
                   >
                     Unregister
                   </button>
-                </>
+                </div>
               );
             })
           ) : (

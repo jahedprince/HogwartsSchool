@@ -21,11 +21,11 @@ const Campuses = () => {
       <div className="row">
         {campuses && campuses.length
           ? campuses.map((campus) => (
-              <div className="single-player-card">
-                <NavLink
-                  to={`/campuses/${campus.id}`}
-                  key={`All Campuses ${campus.id}`}
-                >
+              <div
+                className="single-player-card"
+                key={`All Campuses ${campus.id}`}
+              >
+                <NavLink to={`/campuses/${campus.id}`}>
                   <div className="header-info">
                     <p className="pup-title">{campus.name}</p>
                     <p className="pup-number">{campus.id}</p>

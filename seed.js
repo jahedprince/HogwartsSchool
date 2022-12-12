@@ -109,16 +109,23 @@ const students = [
 const seed = async () => {
   try {
     await db.sync({ force: true });
-    await Promise.all(
+    const [gryffindor, hufflepuff, ravenclaw, slytherin] = await Promise.all(
       campuses.map((campus) => {
         return Campus.create(campus);
       })
     );
-    await Promise.all(
-      students.map((student) => {
-        return Student.create(student);
-      })
-    );
+    // );
+    const [harry, hermione, ron, cedric, luna, myrtle, draco, crabbe, goyle] =
+      await Promise.all(
+        students.map((student) => {
+          return Student.create(student);
+        })
+      );
+
+    await gryffindor.addStudents([harry, hermione, ron]);
+    await hufflepuff.addStudents(cedric);
+    await ravenclaw.addStudents([luna, myrtle]);
+    await slytherin.addStudents([draco, crabbe, goyle]);
   } catch (err) {
     console.log(err);
   }
