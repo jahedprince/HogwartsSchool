@@ -7,11 +7,12 @@ import {
   deleteStudent,
 } from "../features/studentsSlice";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Students = () => {
   const dispatch = useDispatch();
   const students = useSelector(selectStudents);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchStudentsAsync());
@@ -45,6 +46,14 @@ const Students = () => {
                   }}
                 >
                   X
+                </button>
+                <button
+                  onClick={() => {
+                    navigate(`/editStudent/${student.id}`);
+                  }}
+                  className="edit"
+                >
+                  Edit this Wizard
                 </button>
               </div>
             ))

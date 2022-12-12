@@ -14,15 +14,12 @@ const CreateStudent = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     await dispatch(addStudent({ firstName, lastName, email }));
-    setFirstName("");
-    setLastName("");
-    setEmail("");
     navigate("/students");
   };
 
   return (
     <>
-      <form id="todo-form" onSubmit={handleSubmit}>
+      <form className="single-player-view" onSubmit={handleSubmit}>
         <h2> Place A New Wizard! </h2>
 
         <p>
@@ -49,9 +46,11 @@ const CreateStudent = () => {
           <label htmlFor="email">Email Address:</label>
           <input
             name="email"
+            value={email}
             type="email"
             placeholder="Enter Email Address"
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </p>
 

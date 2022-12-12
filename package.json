@@ -7,7 +7,7 @@
     "start": "npm run build-watch & npm run start-server ",
     "build-watch": "webpack -w",
     "start-server": "nodemon --watch server -e js,html server/index.js",
-    "seed":"node seed.js"
+    "seed": "node seed.js"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +25,7 @@
     "react-redux": "^v8.0.1",
     "react-router-dom": "^6.3.0",
     "sequelize": "^6.20.0",
+    "uuid": "^9.0.0",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2"
   },

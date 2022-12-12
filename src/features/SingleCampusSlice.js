@@ -28,28 +28,6 @@ export const editCampusAsync = createAsyncThunk(
     }
   }
 );
-// export const editCampus = createAsyncThunk(
-//   "campuses/editCampus",
-//   async (formData) => {
-//     try {
-//       const { data } = await axios.put(
-//         `/api/campuses/${formData.id}`,
-//         formData
-//       );
-//       return data;
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
-// );
-
-// export const fetchCampusStudents = createAsyncThunk(
-//   "campusStudents",
-//   async (id) => {
-//     const { data } = await axios.get(`/api/campuses/${id}/students`);
-//     return data;
-//   }
-// );
 
 export const campusSlice = createSlice({
   name: "campus",
@@ -61,9 +39,6 @@ export const campusSlice = createSlice({
     builder.addCase(fetchSingleCampusAsync.fulfilled, (state, action) => {
       state.campusInfo = action.payload;
     });
-    // builder.addCase(fetchCampusStudents.fulfilled, (state, action) => {
-    //   state.enrolled = action.payload;
-    // });
     builder.addCase(editCampusAsync.fulfilled, (state, action) => {
       state = action.payload;
     });

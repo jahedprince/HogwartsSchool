@@ -12,39 +12,35 @@ const SingleStudent = () => {
   const dispatch = useDispatch();
 
   const student = useSelector(selectStudent);
-  const { firstName, lastName, email, imageUrl, gpa, campus } = student;
 
   useEffect(() => {
     dispatch(fetchSingleStudentAsync(studentId));
   }, [dispatch]);
 
   return (
-    <div className="single-player-card" class="column">
-      <div className="header-info" class="row">
+    <div className="single-player-view">
+      <div className="single-player-info" class="row">
         <h1>
-          {firstName} {lastName}
+          {student.firstName} {student.lastName}
         </h1>
       </div>
-      <h3>Email: {email}</h3>
-      <h3>GPA: {gpa}</h3>
-      <img src={imageUrl} />
+      <h3>Email: {student.email}</h3>
+      <h3>GPA: {student.gpa}</h3>
+      <img src={student.imageUrl} />
       <div className="campus_enrolled_in">
         <h2>House placed in: </h2>
       </div>
       <div className="campus_enrolled">
-        {campus ? (
-          <div className="text">
-            This student attends:
-            <Link to={`/campuses/${campus.id}`}>{campus.name}</Link>
+        {student.campus ? (
+          <div>
+            This student is placed in:
+            <Link to={`/campuses/${student.campus.id}`}>
+              {student.campus.name}
+            </Link>
           </div>
         ) : (
-          `${firstName} is currently not placed in a house.`
+          `${student.firstName} is currently not placed in a house.`
         )}
-      </div>
-      <div className="form">
-        <Link to={`/students/${studentId}/edit`}>
-          <button className="edit_btn">Edit</button>
-        </Link>
       </div>
     </div>
   );

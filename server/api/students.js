@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const { Student, Campus } = require("../db");
+const Campus = require("../db/Campus");
+const Student = require("../db/Student");
 
 Campus.hasMany(Student);
 Student.belongsTo(Campus);

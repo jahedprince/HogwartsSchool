@@ -13,11 +13,11 @@ export const fetchSingleStudentAsync = createAsyncThunk(
   }
 );
 
-export const editStudent = createAsyncThunk(
+export const editStudentAsync = createAsyncThunk(
   "students/editStudent",
   async ({ studentId, firstName, lastName, email, gpa }) => {
     try {
-      const { data } = await axios.put(`/api/students/${studentId}/edit`, {
+      const { data } = await axios.put(`/api/students/${studentId}`, {
         firstName,
         lastName,
         email,
@@ -38,7 +38,7 @@ export const studentSlice = createSlice({
     builder.addCase(fetchSingleStudentAsync.fulfilled, (state, action) => {
       return action.payload;
     });
-    builder.addCase(editStudent.fulfilled, (state, action) => {
+    builder.addCase(editStudentAsync.fulfilled, (state, action) => {
       state = action.payload;
     });
   },

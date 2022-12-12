@@ -30,7 +30,7 @@ const EditCampus = () => {
   return (
     <>
       <form id="todo-form" onSubmit={handleSubmit}>
-        <h2> Edit House </h2>
+        <h2> Edit House! </h2>
 
         <p>
           <label htmlFor="campusName">Edit Name:</label>

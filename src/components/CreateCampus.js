@@ -23,7 +23,7 @@ const CreateCampus = () => {
 
   return (
     <>
-      <form id="todo-form" onSubmit={handleSubmit}>
+      <form className="single-player-view" onSubmit={handleSubmit}>
         <h2> Add A New House! </h2>
         <p>
           <label htmlFor="name">Name:</label>

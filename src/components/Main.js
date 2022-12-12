@@ -11,19 +11,20 @@ import {
   CreateCampus,
   CreateStudent,
   EditCampus,
-  StudentForm,
+  EditStudent,
 } from "./";
+import Welcome from "./welcome";
 
-// import { fetchCampusesAsync } from "../features/campusesSlice";
-// import { fetchStudentsAsync } from "../features/studentsSlice";
+import { fetchCampusesAsync } from "../features/campusesSlice";
+import { fetchStudentsAsync } from "../features/studentsSlice";
 
 const Main = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchCampusesAsync());
-  //   dispatch(fetchStudentsAsync());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchCampusesAsync());
+    dispatch(fetchStudentsAsync());
+  }, [dispatch]);
 
   return (
     <div id="main">
@@ -32,9 +33,6 @@ const Main = () => {
       </nav>
 
       <main>
-        <h1 id="headline">
-          Welcome to the Hogwarts School of Witchcraft and Wizardry!
-        </h1>
         <Routes>
           <Route path="/campuses" element={<Campuses key={uuidv4()} />} />
           <Route path="/campuses/:campusId" element={<SingleCampus />} />
@@ -44,7 +42,9 @@ const Main = () => {
           <Route path="/students" element={<Students key={uuidv4()} />} />
           <Route path="/students/:studentId" element={<SingleStudent />} />
           <Route path="/CreateStudent" element={<CreateStudent />} />
-          <Route path="/studentForm/:studentId" element={<StudentForm />} />
+          <Route path="/editStudent/:studentId" element={<EditStudent />} />
+
+          <Route path="/" element={<Welcome />} />
         </Routes>
       </main>
     </div>
