@@ -1,7 +1,5 @@
 # Junior Phase Final Project
 
-Video Walkthrough: https://youtu.be/GNWAD95v2zs
-
 I hope you enjoy!
 
 - Jahed :)
