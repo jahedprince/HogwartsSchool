@@ -2,8 +2,6 @@
 
 I hope you enjoy!
 
-- Jahed :)
-
 ## Getting started
 
 1. Fork and clone this repo.
