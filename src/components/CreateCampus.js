@@ -16,8 +16,8 @@ const CreateCampus = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    axios
-      .post(`${apiUrl}/api/campuses`, { name, address, description }) // Use the apiUrl to construct the request URL
+    dispatch(addCampus({ name, address, description }))
+      .unwrap()
       .then(() => {
         setName("");
         setAddress("");
@@ -40,6 +40,7 @@ const CreateCampus = () => {
             value={name}
             placeholder="Enter House Name"
             onChange={(e) => setName(e.target.value)}
+            required // Add the 'required' attribute
           />
         </p>
 
@@ -50,6 +51,7 @@ const CreateCampus = () => {
             value={address}
             placeholder="Enter House Address"
             onChange={(e) => setAddress(e.target.value)}
+            required // Add the 'required' attribute
           />
         </p>
 
@@ -60,15 +62,11 @@ const CreateCampus = () => {
             value={description}
             placeholder="Enter House Description"
             onChange={(e) => setDescription(e.target.value)}
+            required // Add the 'required' attribute
           />
         </p>
 
-        <button
-          type="submit"
-          disabled={name && address && description ? false : true}
-        >
-          Submit
-        </button>
+        <button type="submit">Submit</button>
         <p>
           <Link to="/campuses">Cancel</Link>
         </p>
