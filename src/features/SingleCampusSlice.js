@@ -38,7 +38,7 @@ export const campusSlice = createSlice({
       return action.payload;
     });
     builder.addCase(editCampusAsync.fulfilled, (state, action) => {
-      state = action.payload;
+      return { ...state, ...action.payload };
     });
   },
 });

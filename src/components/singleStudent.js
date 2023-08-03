@@ -7,6 +7,9 @@ import {
   selectStudent,
 } from "../features/SingleStudentSlice";
 
+import apiUrl from "../config";
+import axios from "axios";
+
 const SingleStudent = () => {
   const { studentId } = useParams();
   const dispatch = useDispatch();
@@ -14,8 +17,15 @@ const SingleStudent = () => {
   const student = useSelector(selectStudent);
 
   useEffect(() => {
-    dispatch(fetchSingleStudentAsync(studentId));
-  }, [dispatch]);
+    axios
+      .get(`${apiUrl}/api/students/${studentId}`) // Use the apiUrl to construct the request URL
+      .then((response) => {
+        dispatch(fetchSingleStudentAsync(response.data));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [dispatch, studentId]);
 
   return (
     <div className="single-player-view">

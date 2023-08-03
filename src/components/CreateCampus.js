@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addCampus } from "../features/campusesSlice";
+import apiUrl from "../config";
+import axios from "axios";
 
 const CreateCampus = () => {
   const [name, setName] = useState("");
@@ -14,11 +16,17 @@ const CreateCampus = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    dispatch(addCampus({ name, address, description }));
-    setName("");
-    setAddress("");
-    setDescription("");
-    navigate("/campuses");
+    axios
+      .post(`${apiUrl}/api/campuses`, { name, address, description }) // Use the apiUrl to construct the request URL
+      .then(() => {
+        setName("");
+        setAddress("");
+        setDescription("");
+        navigate("/campuses");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (

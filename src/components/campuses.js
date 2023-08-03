@@ -6,6 +6,8 @@ import {
   selectCampuses,
   deleteCampus,
 } from "../features/campusesSlice";
+import apiUrl from "../config";
+import axios from "axios";
 
 const Campuses = () => {
   const dispatch = useDispatch();
@@ -13,8 +15,26 @@ const Campuses = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchCampusesAsync());
+    axios
+      .get(`${apiUrl}/api/campuses`)
+      .then((response) => {
+        dispatch(fetchCampusesAsync(response.data));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, [dispatch]);
+
+  // const handleDelete = (campusId) => {
+  //   axios
+  //     .delete(`${apiUrl}/api/campuses/${campusId}`)
+  //     .then(() => {
+  //       dispatch(deleteCampus(campusId));
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // };
 
   return (
     <>

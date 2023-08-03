@@ -9,6 +9,9 @@ import {
 
 import { unregisterStudent } from "../features/SingleStudentSlice";
 
+import apiUrl from "../config";
+import axios from "axios";
+
 const SingleCampus = () => {
   const { campusId } = useParams();
   const dispatch = useDispatch();
@@ -17,7 +20,14 @@ const SingleCampus = () => {
   const campus = useSelector(selectCampus);
 
   useEffect(() => {
-    dispatch(fetchSingleCampusAsync(campusId));
+    axios
+      .get(`${apiUrl}/api/campuses/${campusId}`) // Use the apiUrl to construct the request URL
+      .then((response) => {
+        dispatch(fetchSingleCampusAsync(response.data));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, [dispatch, campusId]);
 
   return (

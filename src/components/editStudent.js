@@ -7,6 +7,8 @@ import {
   fetchSingleStudentAsync,
   selectStudent,
 } from "../features/SingleStudentSlice";
+import apiUrl from "../config";
+import axios from "axios";
 
 const EditStudent = () => {
   const dispatch = useDispatch();
@@ -20,7 +22,14 @@ const EditStudent = () => {
   const [gpa, setGpa] = useState(4.0);
 
   useEffect(() => {
-    dispatch(fetchSingleStudentAsync(studentId));
+    axios
+      .get(`${apiUrl}/api/students/${studentId}`) // Use the apiUrl to construct the request URL
+      .then((response) => {
+        dispatch(fetchSingleStudentAsync(response.data));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, [dispatch, studentId]);
 
   const handleSubmit = async (evt) => {

@@ -8,6 +8,8 @@ import {
 } from "../features/studentsSlice";
 
 import { NavLink, useNavigate } from "react-router-dom";
+import apiUrl from "../config";
+import axios from "axios";
 
 const Students = () => {
   const dispatch = useDispatch();
@@ -15,7 +17,14 @@ const Students = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchStudentsAsync());
+    axios
+      .get(`${apiUrl}/api/students`) // Use the apiUrl to construct the request URL
+      .then((response) => {
+        dispatch(fetchStudentsAsync(response.data));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, [dispatch]);
 
   return (

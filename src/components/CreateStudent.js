@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addStudent } from "../features/studentsSlice";
+import apiUrl from "../config";
+import axios from "axios";
 
 const CreateStudent = () => {
   const [firstName, setFirstName] = useState("");
@@ -13,7 +15,7 @@ const CreateStudent = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    await dispatch(addStudent({ firstName, lastName, email }));
+    await axios.post(`${apiUrl}/api/students`, { firstName, lastName, email }); // Use the apiUrl to construct the request URL
     navigate("/students");
   };
 
