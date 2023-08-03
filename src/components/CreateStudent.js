@@ -13,9 +13,9 @@ const CreateStudent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async (evt) => {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
-    await axios.post(`${apiUrl}/api/students`, { firstName, lastName, email }); // Use the apiUrl to construct the request URL
+    dispatch(addStudent({ firstName, lastName, email }));
     navigate("/students");
   };
 
@@ -31,6 +31,7 @@ const CreateStudent = () => {
             value={firstName}
             placeholder="Enter First Name"
             onChange={(e) => setFirstName(e.target.value)}
+            required
           />
         </p>
 
@@ -41,6 +42,7 @@ const CreateStudent = () => {
             value={lastName}
             placeholder="Enter Last Name"
             onChange={(e) => setLastName(e.target.value)}
+            required
           />
         </p>
 
