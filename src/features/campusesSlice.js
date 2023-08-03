@@ -12,7 +12,7 @@ export const fetchCampusesAsync = createAsyncThunk("/campuses", async () => {
 
 export const addCampus = createAsyncThunk(
   "POST Campus",
-  async ({ name, address, description }) => {
+  async ({ name, address, description }, { rejectWithValue }) => {
     try {
       const { data } = await axios.post("/api/campuses", {
         name,
@@ -21,7 +21,7 @@ export const addCampus = createAsyncThunk(
       });
       return data;
     } catch (err) {
-      console.error(err);
+      return rejectWithValue(err.response.data); // Return the error response data
     }
   }
 );
@@ -48,6 +48,19 @@ export const campusesSlice = createSlice({
     });
     builder.addCase(deleteCampus.fulfilled, (state, action) => {
       return state.filter((campus) => campus.id !== action.payload.id);
+    });
+    // Handle the rejected state for each thunk
+    builder.addCase(fetchCampusesAsync.rejected, (state, action) => {
+      // Handle the error, you can log it or display an error message
+      console.error("Error fetching campuses:", action.error);
+    });
+    builder.addCase(addCampus.rejected, (state, action) => {
+      // Handle the error, you can log it or display an error message
+      console.error("Error adding campus:", action.error);
+    });
+    builder.addCase(deleteCampus.rejected, (state, action) => {
+      // Handle the error, you can log it or display an error message
+      console.error("Error deleting campus:", action.error);
     });
   },
 });
