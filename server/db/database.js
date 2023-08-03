@@ -2,7 +2,7 @@
 // Postgres database by creating a Sequelize instance (called `db`).
 // You shouldn't need to make any modifications here.
 const { Sequelize } = require("sequelize");
-const pkg = require("./package.json");
+const pkg = require("../../package.json");
 
 let db;
 
