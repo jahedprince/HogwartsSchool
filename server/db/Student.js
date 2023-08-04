@@ -27,11 +27,6 @@ const Student = db.define("student", {
   imageUrl: {
     type: Sequelize.STRING,
     defaultValue: "icon.jpeg",
-    validate: {
-      isUrl: {
-        msg: "Please provide a valid image URL.",
-      },
-    },
   },
   gpa: {
     type: Sequelize.FLOAT,
