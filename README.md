@@ -12,7 +12,7 @@ I hope you enjoy!
 
 ## Deployment
 
-The project is deployed on Heroku, a cloud platform that allows easy deployment and hosting of web applications. The live version of the project can be accessed at [Link to Heroku App](https://your-heroku-app-url.com).
+The project is deployed on Heroku, a cloud platform that allows easy deployment and hosting of web applications. The live version of the project can be accessed at [Link to Heroku App](https://hogwartsschool-156e68ebb527.herokuapp.com/).
 
 To deploy the project to Heroku, the following steps were taken:
 
