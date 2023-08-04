@@ -150,3 +150,5 @@ async function runSeed() {
 if (require.main === module) {
   runSeed();
 }
+
+module.exports = { seed };
