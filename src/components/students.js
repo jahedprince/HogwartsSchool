@@ -44,7 +44,12 @@ const Students = () => {
                       </p>
                       <p class="pup-number">{student.id}</p>
                     </div>
-                    <img src={student.imageUrl} />
+                    <div class="image-container">
+                      <img
+                        src={student.imageUrl}
+                        alt={`Image of ${student.firstName}`}
+                      />
+                    </div>
                   </div>
                 </NavLink>
 

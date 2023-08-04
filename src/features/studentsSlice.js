@@ -12,12 +12,13 @@ export const fetchStudentsAsync = createAsyncThunk("/students", async () => {
 
 export const addStudent = createAsyncThunk(
   "POST Student",
-  async ({ firstName, lastName, email }) => {
+  async ({ firstName, lastName, email, imageUrl }) => {
     try {
       const { data } = await axios.post("/api/students", {
         firstName,
         lastName,
         email,
+        imageUrl, // Include the imageUrl field here
       });
       return data;
     } catch (error) {

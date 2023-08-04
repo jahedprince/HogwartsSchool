@@ -10,13 +10,14 @@ const CreateCampus = () => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    dispatch(addCampus({ name, address, description }))
+    dispatch(addCampus({ name, address, description, imageUrl }))
       .unwrap()
       .then(() => {
         setName("");
@@ -63,6 +64,16 @@ const CreateCampus = () => {
             placeholder="Enter House Description"
             onChange={(e) => setDescription(e.target.value)}
             required // Add the 'required' attribute
+          />
+        </p>
+
+        <p>
+          <label htmlFor="imageUrl">Image URL:</label>
+          <input
+            name="imageUrl"
+            value={imageUrl}
+            placeholder="Enter Image URL"
+            onChange={(e) => setImageUrl(e.target.value)}
           />
         </p>
 

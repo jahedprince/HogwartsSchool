@@ -12,6 +12,11 @@ const Campus = db.define("campus", {
   imageUrl: {
     type: Sequelize.STRING,
     defaultValue: "househat.png",
+    validate: {
+      isUrl: {
+        msg: "Please provide a valid image URL.",
+      },
+    },
   },
   address: {
     type: Sequelize.STRING,

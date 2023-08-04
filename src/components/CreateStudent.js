@@ -9,13 +9,14 @@ const CreateStudent = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    dispatch(addStudent({ firstName, lastName, email }));
+    dispatch(addStudent({ firstName, lastName, email, imageUrl }));
     navigate("/students");
   };
 
@@ -55,6 +56,16 @@ const CreateStudent = () => {
             placeholder="Enter Email Address"
             onChange={(e) => setEmail(e.target.value)}
             required
+          />
+        </p>
+
+        <p>
+          <label htmlFor="imageUrl">Image URL:</label>
+          <input
+            name="imageUrl"
+            value={imageUrl}
+            placeholder="Enter Image URL"
+            onChange={(e) => setImageUrl(e.target.value)}
           />
         </p>
 

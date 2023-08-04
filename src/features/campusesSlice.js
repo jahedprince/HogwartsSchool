@@ -12,12 +12,13 @@ export const fetchCampusesAsync = createAsyncThunk("/campuses", async () => {
 
 export const addCampus = createAsyncThunk(
   "POST Campus",
-  async ({ name, address, description }, { rejectWithValue }) => {
+  async ({ name, address, description, imageUrl }, { rejectWithValue }) => {
     try {
       const { data } = await axios.post("/api/campuses", {
         name,
         address,
         description,
+        imageUrl,
       });
       return data;
     } catch (err) {
