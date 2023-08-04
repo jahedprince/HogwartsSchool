@@ -140,7 +140,7 @@ async function runSeed() {
     await seed();
     console.log("Seeding success!");
   } catch (err) {
-    console.error("Oh noes! Something went wrong!");
+    console.error("Oh no! Something went wrong!");
     console.error(err);
   } finally {
     db.close();
